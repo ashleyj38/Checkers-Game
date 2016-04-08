@@ -120,11 +120,11 @@ void initializeBoard(char CheckerBoard[][8])
 		{
 			if (row == 0 || row == 1 || row == 2)
 			{
-				if ((row == 0 || row == 2) && (col % 2 == 0))
+				if ((row == 0 || row == 2) && (col % 2 == 1))
 				{
 					CheckerBoard[row][col] = 'R';
 				}
-				else if (row == 1 && col % 2 == 1)
+				else if (row == 1 && col % 2 == 0)
 				{
 					CheckerBoard[row][col] = 'R';
 				}
