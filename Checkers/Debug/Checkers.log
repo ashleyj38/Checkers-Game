@@ -1,5 +1,5 @@
 ﻿  main.cpp
-c:\users\ashle\onedrive\code challenges\checkers\checkers\main.cpp(219): warning C4101: 'slope': unreferenced local variable
-c:\users\ashle\onedrive\code challenges\checkers\checkers\main.cpp(218): warning C4101: 'temp': unreferenced local variable
+c:\users\ashle\onedrive\code challenges\checkers\checkers\main.cpp(224): warning C4101: 'slope': unreferenced local variable
+c:\users\ashle\onedrive\code challenges\checkers\checkers\main.cpp(223): warning C4101: 'temp': unreferenced local variable
   Checkers.vcxproj -> C:\Users\ashle\OneDrive\Code Challenges\Checkers\Debug\Checkers.exe
   Checkers.vcxproj -> C:\Users\ashle\OneDrive\Code Challenges\Checkers\Debug\Checkers.pdb (Partial PDB)

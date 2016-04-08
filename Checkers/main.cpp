@@ -22,7 +22,7 @@ int main()
 	char validPiece, opponent;
 	int rowChoice, colChoice, moveRowChoice, moveColChoice;
 	bool valid;
-	int numRedPieces = 12, numBlkPieces = 1;
+	int numRedPieces = 12, numBlkPieces = 12;
 	int redScore = 0, blkScore = 0;
 	int jump;
 
@@ -96,8 +96,8 @@ int main()
 
 		player++;
 
-		if (player == 3)
-			numBlkPieces = 0;
+		/*if (player == 3)
+			numBlkPieces = 0*/
 
 		//printBoard(Board); //Delete this line after testing
 
@@ -196,18 +196,23 @@ bool validateMove(char CheckerBoard[][8], char opponent, int row, int col, int m
 		cout << "REASON: Wrong direction.\n\n";
 		return false;
 	}
-	else if (abs((col - moveCol) / (row - moveRow)) == 1)
+	else if (abs((col - moveCol) / (row - moveRow)) == 1 && abs(col - moveCol) == 1 && abs(row - moveRow) == 1)
 	{
 		cout << "REASON: Single move\n\n";
 		return true;
 	}
-	else if (abs((col - moveCol) / (row - moveRow)) == 2 && CheckerBoard[moveRow - 1][moveCol - 1] == opponent)
+	else if (abs((col - moveCol) / (row - moveRow)) == 1 && abs(col - moveCol) == 2 && abs(row - moveRow) == 2 && CheckerBoard[moveRow + (moveRow - row)/(-2) - 1][moveCol + (moveCol - col)/(-2) - 1] == opponent)
 	{
 		cout << "REASON: Hop\n\n";
 		return true;
 	}
 	else
 	{
+		cout << "abs(col - moveCol): " << abs(col - moveCol) << "\tabs(row - moveRow == 2): " << abs(row - moveRow) << "\tabs((col - moveCol) / (row - moveRow)): " << abs((col - moveCol) / (row - moveRow)) << endl;
+		cout << "Row checked: " << (moveRow + (moveRow - row) / (-2) - 1) << endl;
+		cout << "Column checked: " << (moveCol + (moveCol - col) / (-2) - 1) << endl;
+		cout << CheckerBoard[moveRow + (moveRow - row) / (-2) - 1][moveCol + (moveCol - col) / (-2) - 1] << endl << endl;
+		cout << "Opponent: " << opponent << endl;
 		cout << "REASON: Hop not over opponent\n\n.";
 		return false;
 	}
@@ -220,13 +225,28 @@ int movePiece(char CheckerBoard[][8], char piece, int begRow, int begCol, int fi
 	
 	CheckerBoard[begRow - 1][begCol - 1] = '0';
 
-	if (abs((begCol - finalCol) / (begRow - finalRow)) == 2)
+	if (abs(begCol - finalCol) == 2 && abs(begRow - finalRow) == 2)
 	{
 		if (begRow > finalRow && begCol > finalCol)
 		{
 			CheckerBoard[begRow-2][begCol-2] = '0';
 			CheckerBoard[finalRow - 1][finalCol - 1] = piece;
 
+		}
+		else if (begRow < finalRow && begCol < finalCol)
+		{
+			CheckerBoard[finalRow - 2][finalCol - 2] = '0';
+			CheckerBoard[finalRow - 1][finalCol - 1] = piece;
+		}
+		else if (begRow > finalRow && begCol < finalCol)
+		{
+			CheckerBoard[begRow - 2][begCol + 2] = '0';
+			CheckerBoard[finalRow - 1][finalCol - 1] = piece;
+		}
+		else
+		{
+			CheckerBoard[begRow + 2][begCol - 2] = '0';
+			CheckerBoard[finalRow - 1][finalCol - 1] = piece;
 		}
 		return 1;
 	}
